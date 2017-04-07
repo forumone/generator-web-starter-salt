@@ -12,12 +12,13 @@ nginx:
                 - default_server
               - listen:
                 - 443 ssl default_server
+              - index index.php index.html
               - ssl_certificate: ssl/vagrant.crt
               - ssl_certificate_key: ssl/vagrant.key
               - root: /vagrant/public
               - access_log: /var/log/nginx/vagrant.log
               - location /:
-                - try_files: $uri $uri/index.html $uri/index.htm @rewrite
+                - try_files: $uri $uri/ @rewrite
               - location ~ \..*/.*\.php$:
                 - return: 403
               - location @rewrite:
