@@ -4,6 +4,7 @@ base:
     - epel
     - jinja26
     - node
+    - node.npm-install
     - ruby
 #    Load mysql.client first to avoid getting mysql-libs from base repo
     - mysql.client
@@ -17,8 +18,9 @@ base:
     - php.ng.fpm.pools
     - composer
     - drush
+    - java
     - solr.v4
-    - mailhog
     - elasticsearch
+    - mailhog
     - core.cleanup
 
