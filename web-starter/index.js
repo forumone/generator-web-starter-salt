@@ -30,9 +30,17 @@ module.exports = generators.Base.extend({
       php_base : 'php56u',
       mysql_base : 'mysql56u',
       mysql_password : 'web',
+      doc_root : '/vagrant/public',
     }, this.config.getAll());
 
     return that.prompt([{
+      // Put config prompts here
+      type : 'input',
+      name : 'doc_root',
+      message : 'Specify the document root:',
+      default : config.doc_root
+    },
+    {
       // Put config prompts here
       type : 'list',
       name : 'php_base',

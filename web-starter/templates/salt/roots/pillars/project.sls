@@ -2,7 +2,7 @@
 include:
   - nginx.<%= platform %>:
       defaults:
-        document_root: /vagrant/public
+        document_root: <%= docroot %>
   
 # Extra packages to install
 extra_packages:
