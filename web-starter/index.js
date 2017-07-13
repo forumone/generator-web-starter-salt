@@ -71,10 +71,10 @@ module.exports = generators.Base.extend({
       var that = this;
       
       var ignoreFiles = [];
-      
-      // If generated.sls exists don't overwrite it
-      if (this.fs.exists('salt/roots/pillars/generated.sls')) {
-        ignoreFiles.push('**/generated.sls');
+
+      // If project.sls exists don't overwrite it
+      if (this.fs.exists('salt/roots/pillars/project.sls')) {
+        ignoreFiles.push('**/project.sls');
       }
       
       return glob('**', {
