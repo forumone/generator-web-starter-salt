@@ -16,8 +16,8 @@ module.exports = generators.Base.extend({
     var that = this;
     var php_versions = [
       { name:'5.6', value:'php56u' },
-      { name:'7.0', value:'php70u' },
       { name:'7.1', value:'php71u' },
+      { name:'7.0', value:'php70u' },
       { name:'5.3', value:'php' },
     ];
     var mysql_versions = [{ name:'5.6', value:'mysql56u' }];

@@ -59,7 +59,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   	
     config.vm.synced_folder ".", "/vagrant", synched_opts
-    config.vm.synced_folder "./salt/roots/", "/srv/salt", synched_opts
+    config.vm.synced_folder "./salt/roots/", "/srv/salt", :nfs => { }
 
     config.nfs.map_uid = Process.uid
     config.nfs.map_gid = Process.gid
@@ -88,7 +88,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   
   config.vm.provider :virtualbox do |vb|
     # Use VBoxManage to customize the VM. For example to change memory:
-    vb.customize ["modifyvm", :id, "--memory", "1736"]
+    vb.customize ["modifyvm", :id, "--memory", "2048"]
     vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
   end
 
@@ -122,6 +122,26 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   
   # https://github.com/mitchellh/vagrant/issues/5001
   config.vm.box_download_insecure = true
+
+  # Post boot message for users
+$boot_msg = <<MSG
+------------------------------------------------------
+Your local vm is available at http://vagrant.byf1.io/
+
+URLS and Ports:
+ - SSL        - https://vagrant.byf1.io/
+ - MailHog    - http://vagrant.byf1.io:8025/
+ - nginx, No Varnish - http://vagrant.byf1.io:8080/
+ - Solr       - http://vagrant.byf1.io:8983/solr/
+ - ElasticSearch http://vagrant.byf1.io:9200/
+ - MySQL      - vagrant.byf1.io, port 3306
+
+For localhost port forwarded mappings, see Vagrantfile
+
+------------------------------------------------------
+MSG
+
+  config.vm.post_up_message = $boot_msg
 
 end
 
