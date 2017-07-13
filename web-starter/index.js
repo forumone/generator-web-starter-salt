@@ -20,7 +20,11 @@ module.exports = generators.Base.extend({
       { name:'7.0', value:'php70u' },
       { name:'5.3', value:'php' },
     ];
-    var mysql_versions = [{ name:'5.6', value:'mysql56u' }];
+    var mysql_versions = [
+      { name:'5.6', value:'mysql56u' },
+      { name:'5.7', value:'mysql57u' },
+      { name:'5.5', value:'mysql55' },
+    ];
     var config = _.extend({
       // Put default config values here
       php_base : 'php56u',
