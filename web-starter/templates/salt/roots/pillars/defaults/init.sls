@@ -394,6 +394,9 @@ php:
             xdebug.remote_connect_back: 1
             xdebug.remote_handler: "dbgp"
             sendmail_path: "/usr/local/bin/MailHog sendmail "
+            opcache.revalidate_path: 1
+            opcache.use_cwd: 1
+            opcache.enable_cli: 0
 
 #
 #    # php-xcache settings

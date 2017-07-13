@@ -644,7 +644,7 @@ pillar_roots:
 #
 
 # Allow running minion locally
-local: True
+#local: True
 
 # GitFS
 fileserver_backend:

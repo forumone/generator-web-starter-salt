@@ -17,3 +17,10 @@ install-misc-packages:
     - enablerepo: epel
     - pkgs: {{ packages }}
 {% endif %}
+
+# Restart services at end of provision. Dependencies may update and cause
+# symbol lookup errors otherwise
+
+restart-running-services-after-provision:
+  cmd.run:
+    - name: for service in nginx php-fpm httpd varnish mysqld; do pgrep $service >/dev/null && /etc/init.d/$service restart; done

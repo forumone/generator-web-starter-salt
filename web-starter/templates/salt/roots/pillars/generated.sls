@@ -7,7 +7,14 @@ node:
   checksum: f0a53527f52dbcab3b98921a6cfe8613e5fe26fb796624988f6d615c30305a95
 
 java: java-1.8.0-openjdk
- 
+
+elasticsearch:
+# Tested versions: 5.3.0, 2.4.2
+  version: 5.3.0
+  config:
+    http.cors.enabled: true
+    network.bind_host: 0.0.0.0
+
 mysql:
   mysql_version: <%= mysql_base %>
   database:

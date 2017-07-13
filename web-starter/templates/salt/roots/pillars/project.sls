@@ -3,7 +3,7 @@ include:
   - nginx.<%= platform %>:
       defaults:
         document_root: /vagrant/public
-
+  
 # Extra packages to install
 extra_packages:
   - gcc
@@ -20,8 +20,7 @@ scl_packages:
 #    - grunt
 #    - grunt@0.3 # specify a version
 
-# Varnish
-## Define custom varnish VCL for project in config/salt_templates/varnish/default.vcl, backends.vcl, secret, etc.
+## Define custom VCL for project in config/salt_templates/varnish/default.vcl, backends.vcl, secret, etc.
 #varnish:
 #  vcl: salt://salt_templates/varnish/
 

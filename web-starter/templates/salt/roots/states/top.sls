@@ -20,7 +20,7 @@ base:
     - drush
     - java
     - solr.v4
-    - elasticsearch
+#    - elasticsearch
     - mailhog
     - core.cleanup
 
