@@ -18,9 +18,17 @@ base:
     - php.ng.fpm.pools
     - composer
     - drush
+<% if (search != '') { %>
     - java
+<% } %>
+<% if (search == 'solr3') { %>
+    - solr.v3
+<% } %>
+<% if (search == 'solr4') { %>
     - solr.v4
-#    - elasticsearch
+<% } %>
+<% if (search == 'elasticsearch') { %>
+    - elasticsearch
+<% } %>
     - mailhog
     - core.cleanup
-

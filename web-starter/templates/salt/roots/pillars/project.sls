@@ -2,7 +2,7 @@
 include:
   - nginx.<%= platform %>:
       defaults:
-        document_root: <%= docroot %>
+        document_root: <%= doc_root %>
   
 # Extra packages to install
 extra_packages:

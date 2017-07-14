@@ -31,6 +31,7 @@ module.exports = generators.Base.extend({
       mysql_base : 'mysql56u',
       mysql_password : 'web',
       doc_root : '/vagrant/public',
+      search : 'None',
     }, this.config.getAll());
 
     return that.prompt([{
@@ -39,6 +40,15 @@ module.exports = generators.Base.extend({
       name : 'doc_root',
       message : 'Specify the document root:',
       default : config.doc_root
+    },
+    {
+      // Put config prompts here
+      type : 'checkbox',
+      name : 'search',
+      choices : mysql_versions,
+      message : 'Select a search provider',
+      default : config.search,
+      choices : [ 'solr3', 'solr4', 'elasticsearch' ]
     },
     {
       // Put config prompts here
