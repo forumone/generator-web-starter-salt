@@ -15,7 +15,7 @@ nginx:
               - index: index.php index.html
               - ssl_certificate: ssl/vagrant.crt
               - ssl_certificate_key: ssl/vagrant.key
-              - root: {{ document_root }}
+              - root: /vagrant/public
               - port_in_redirect: 'off'
               - access_log: /var/log/nginx/vagrant.log
               - location /:

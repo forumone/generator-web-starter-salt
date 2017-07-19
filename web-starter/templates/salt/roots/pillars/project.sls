@@ -1,8 +1,6 @@
 # Define nginx template
 include:
   - nginx.<%= platform %>:
-      defaults:
-        document_root: /vagrant/public
   
 # Extra packages to install
 extra_packages:
