@@ -1,6 +1,6 @@
 # Define nginx template
 include:
-  - nginx.<%= platform %>:
+  - nginx.<%= platform %>
   
 # Extra packages to install
 extra_packages:
