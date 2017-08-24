@@ -45,7 +45,6 @@ module.exports = generators.Base.extend({
       // Put config prompts here
       type : 'checkbox',
       name : 'search',
-      choices : mysql_versions,
       message : 'Select a search provider',
       default : config.search,
       choices : [ 'solr3', 'solr4', 'elasticsearch' ]
