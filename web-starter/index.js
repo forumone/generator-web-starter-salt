@@ -30,7 +30,7 @@ module.exports = generators.Base.extend({
       php_base : 'php56u',
       mysql_base : 'mysql56u',
       mysql_password : 'web',
-      doc_root : '/vagrant/public',
+      doc_root : 'public',
       search : 'None',
     }, this.config.getAll());
 
@@ -76,6 +76,32 @@ module.exports = generators.Base.extend({
 
       // Expose the answers on the parent generator
       _.extend(that.options.parent.answers, { 'web-starter-salt' : answers });
+
+      // Add database service
+      that.options.addService('database', {
+        db_name: answers.mysql_password,
+        db_user: answers.mysql_password,
+        db_password: answers.mysql_password,
+        version: answers.mysql_base,
+      });
+      
+      // Add PHP service
+      that.options.addService('php', {
+        webroot: answers.php_base
+      });
+      
+      // Add web server service
+      that.options.addService('web', {
+        doc_root: answers.doc_root,
+      });
+      
+      // Differentiate between Solr and ElasticSearch
+      const service = (answers.search === 'elasticsearch') ? 'elasticsearch' : 'solr';
+      
+      // Add search service
+      that.options.addService('search', {
+        service: service,
+      });
     });
   },
   writing : {
