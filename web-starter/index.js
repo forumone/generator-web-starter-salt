@@ -110,6 +110,7 @@ module.exports = generators.Base.extend({
       // Get current system config for this sub-generator
       var config = this.config.getAll();
       _.extend(config, this.options.parent.answers);
+      config.services = this.options.getServices();
 
       var that = this;
       
