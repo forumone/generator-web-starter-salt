@@ -23,7 +23,12 @@ if [[ -f "${VAGRANT_CORE_FOLDER}/config/shell/custom/post-provision.unprivileged
   source ${VAGRANT_CORE_FOLDER}/config/shell/custom/post-provision.unprivileged.sh
 fi;
 
-if [[ -f "${VAGRANT_CORE_FOLDER}/public/composer.json" ]]; then
+if [[ -f "${VAGRANT_CORE_FOLDER}/<%= services.web.doc_root %>/composer.json" ]]; then
+  echo 'Installing composer'
+  cd ${VAGRANT_CORE_FOLDER}/<%= services.web.doc_root %> && composer install
+fi
+
+if [[ -f "${VAGRANT_CORE_FOLDER}/composer.json" ]]; then
   echo 'Installing compooser'
-  cd ${VAGRANT_CORE_FOLDER}/public && composer install
+  cd ${VAGRANT_CORE_FOLDER} && composer install
 fi
