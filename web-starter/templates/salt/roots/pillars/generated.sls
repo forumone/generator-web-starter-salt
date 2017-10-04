@@ -41,7 +41,11 @@ drush:
 {% set doc_root = '<%= doc_root %>' %}
 apache:
   lookup:
+<% if (php_base.indexOf('php7') !== -1) { %>
+    mod_php5: mod_<%= php_base %>
+<% } else { %>
     mod_php5: <%= php_base %>
+<% } %>
   global:
     NameVirtualHost: '*:443'
     LoadModule: ssl_module modules/mod_ssl.so

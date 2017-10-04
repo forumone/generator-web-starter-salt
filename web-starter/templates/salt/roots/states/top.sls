@@ -22,10 +22,9 @@ base:
 <% } %>
 <% if (webserver == 'apache') { %>
     - core.certificates
-    - apache
     - apache.mod_ssl
-    - apache.config
     - apache.mod_php5
+    - apache.config
     - apache.vhosts.standard
 <% } %>
     - composer
