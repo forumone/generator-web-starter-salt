@@ -21,6 +21,7 @@ base:
     - php.ng.fpm.pools
 <% } %>
 <% if (webserver == 'apache') { %>
+    - core.certificates
     - apache
     - apache.mod_ssl
     - apache.config
