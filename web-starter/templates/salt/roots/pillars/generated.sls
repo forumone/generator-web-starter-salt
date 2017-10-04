@@ -42,13 +42,18 @@ drush:
 apache:
   lookup:
     mod_php5: <%= php_base %>
+  global:
+    NameVirtualHost: '*:443'
+    LoadModule: ssl_module modules/mod_ssl.so
+    Listen: 443
+    
   sites:
     vagrant.byf1.io:
       enabled: True
       template_file: salt://apache/vhosts/standard.tmpl
       interface: '*'
       port: '8080'
-      ServerAlias: '*'
+      ServerAlias: '*.vagrant.byf1.io *'
       DocumentRoot: /vagrant/{{doc_root}}
       Rewrite: |
         RewriteRule ^index\.php$ - [L]
@@ -67,7 +72,7 @@ apache:
       port: '443'
       SSLCertificateFile: /etc/pki/tls/certs/vagrant.crt
       SSLCertificateKeyFile: /etc/pki/tls/private/vagrant.key
-      ServerAlias: '*'
+      ServerAlias: 'vagrant.byf1.io *.vagrant.byf1.io'
       DocumentRoot: /vagrant/{{doc_root}}
       Rewrite: |
         RewriteRule ^index\.php$ - [L]

@@ -10,3 +10,10 @@ default_vagrant_ssl_key:
     - mode: 600
     - makedirs: True
     - contents_pillar: nginx:ng:certificates:vagrant:private_key
+
+nuke_apache_default_ssl:
+  file.managed:
+    - name: /etc/httpd/conf.d/ssl.conf
+    - makedirs: True
+    - contents:
+      - '# defaults handled in formula. Disabling rpm-provided ssl.conf'
