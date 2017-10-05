@@ -36,3 +36,56 @@ php:
 
 drush:
   version: '8.x'
+
+<% if (webserver == 'apache') { %>
+{% set doc_root = '<%= doc_root %>' %}
+apache:
+  lookup:
+<% if (php_base.indexOf('php7') !== -1) { %>
+    mod_php5: mod_<%= php_base %>
+<% } else { %>
+    mod_php5: <%= php_base %>
+<% } %>
+  global:
+    NameVirtualHost: '*:443'
+    LoadModule: ssl_module modules/mod_ssl.so
+    Listen: 443
+    
+  sites:
+    vagrant.byf1.io:
+      enabled: True
+      template_file: salt://apache/vhosts/standard.tmpl
+      interface: '*'
+      port: '8080'
+      ServerAlias: '*.vagrant.byf1.io *'
+      DocumentRoot: /vagrant/{{doc_root}}
+      Rewrite: |
+        RewriteRule ^index\.php$ - [L]
+        RewriteCond %{REQUEST_FILENAME} !-f
+        RewriteCond %{REQUEST_FILENAME} !-d
+        RewriteRule . /index.php [L]
+      Directory:
+        /vagrant/{{doc_root}}:
+          AllowOverride: All
+          Order: allow,deny
+          Allow: from all
+    vagrant.byf1.io-ssl:
+      enabled: True
+      template_file: salt://apache/vhosts/standard.tmpl
+      interface: '*'
+      port: '443'
+      SSLCertificateFile: /etc/pki/tls/certs/vagrant.crt
+      SSLCertificateKeyFile: /etc/pki/tls/private/vagrant.key
+      ServerAlias: 'vagrant.byf1.io *.vagrant.byf1.io'
+      DocumentRoot: /vagrant/{{doc_root}}
+      Rewrite: |
+        RewriteRule ^index\.php$ - [L]
+        RewriteCond %{REQUEST_FILENAME} !-f
+        RewriteCond %{REQUEST_FILENAME} !-d
+        RewriteRule . /index.php [L]
+      Directory:
+        /vagrant/{{doc_root}}:
+          AllowOverride: All
+          Order: allow,deny
+          Allow: from all
+<% } %>

@@ -10,12 +10,23 @@ base:
     - mysql.client
     - mysql
     - memcached.config
+<% if (webserver == 'nginx') { %>
     - nginx.ng
+<% } %>
     - varnish.repo
     - varnish
     - php.ng
     - php.ng.cli.ini
+<% if (webserver == 'nginx') { %>
     - php.ng.fpm.pools
+<% } %>
+<% if (webserver == 'apache') { %>
+    - core.certificates
+    - apache.mod_ssl
+    - apache.mod_php5
+    - apache.config
+    - apache.vhosts.standard
+<% } %>
     - composer
 <% if (platform == 'drupal' || platform == 'drupal8') { %>
     - drush

@@ -32,6 +32,7 @@ module.exports = generators.Base.extend({
       mysql_password : 'web',
       doc_root : 'public',
       search : 'None',
+      webserver : 'nginx',
     }, this.config.getAll());
 
     return that.prompt([{
@@ -40,6 +41,14 @@ module.exports = generators.Base.extend({
       name : 'doc_root',
       message : 'Specify the document root:',
       default : config.doc_root
+    },
+    {
+      // Put config prompts here
+      type : 'checkbox',
+      name : 'webserver',
+      message : 'Select a web server',
+      default : config.webserver,
+      choices : [ 'nginx', 'apache' ]
     },
     {
       // Put config prompts here
@@ -93,6 +102,7 @@ module.exports = generators.Base.extend({
       // Add web server service
       that.options.addService('web', {
         doc_root: answers.doc_root,
+        webserver: answers.webserver,
       });
       
       // Differentiate between Solr and ElasticSearch

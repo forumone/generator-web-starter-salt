@@ -684,3 +684,5 @@ gitfs_remotes:
     - base: 1.0.x
   - https://github.com/forumone/varnish-formula.git:
     - base: 1.0.x
+  - https://github.com/forumone/apache-formula.git:
+    - base: 1.0.x
