@@ -16,8 +16,10 @@ base:
     - php.ng
     - php.ng.cli.ini
     - php.ng.fpm.pools
-    - composer
-    - drush
+     - drush
+<% if (platform == 'wordpress') { %>
+    - wpcli
+<% } %>
 <% if (search != '') { %>
     - java
 <% } %>
