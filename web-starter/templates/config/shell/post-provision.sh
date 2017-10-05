@@ -1,4 +1,5 @@
 #!/bin/bash
+export PATH=/usr/local/bin:$PATH
 
 # Run post-provision tasks that need to be root.
 
