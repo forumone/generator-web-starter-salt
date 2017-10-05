@@ -662,6 +662,8 @@ gitfs_remotes:
     - base: 1.0.x
   - https://github.com/forumone/drush-formula.git:
     - base: 1.0.x
+  - https://github.com/forumone/wpcli-formula.git:
+    - base: 1.0.x
   - https://github.com/forumone/node-formula.git:
     - base: 1.0.x
   - https://github.com/forumone/redis-formula.git:

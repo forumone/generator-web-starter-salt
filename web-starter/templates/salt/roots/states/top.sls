@@ -20,6 +20,9 @@ base:
 <% if (platform == 'drupal' || platform == 'drupal8') { %>
     - drush
 <% } %>
+<% if (platform == 'wordpress') { %>
+    - wpcli
+<% } %>
 <% if (search != '') { %>
     - java
 <% } %>
