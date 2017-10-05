@@ -17,7 +17,9 @@ base:
     - php.ng.cli.ini
     - php.ng.fpm.pools
     - composer
+<% if (platform == 'drupal' || platform == 'drupal8') { %>
     - drush
+<% } %>
 <% if (search != '') { %>
     - java
 <% } %>
