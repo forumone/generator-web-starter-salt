@@ -96,7 +96,7 @@ module.exports = generators.Base.extend({
       
       // Add PHP service
       that.options.addService('php', {
-        webroot: answers.php_base
+        version: answers.php_base
       });
       
       // Add web server service
