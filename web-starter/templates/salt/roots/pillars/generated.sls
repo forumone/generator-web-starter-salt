@@ -59,13 +59,10 @@ apache:
       port: '8080'
       ServerAlias: '*.vagrant.byf1.io *'
       DocumentRoot: /vagrant/{{doc_root}}
-      Rewrite: |
-        RewriteRule ^index\.php$ - [L]
-        RewriteCond %{REQUEST_FILENAME} !-f
-        RewriteCond %{REQUEST_FILENAME} !-d
-        RewriteRule . /index.php [L]
       Directory:
         /vagrant/{{doc_root}}:
+          DirectoryIndex: index.php index.html
+          RewriteEngine: On
           AllowOverride: All
           Order: allow,deny
           Allow: from all
@@ -78,13 +75,10 @@ apache:
       SSLCertificateKeyFile: /etc/pki/tls/private/vagrant.key
       ServerAlias: 'vagrant.byf1.io *.vagrant.byf1.io'
       DocumentRoot: /vagrant/{{doc_root}}
-      Rewrite: |
-        RewriteRule ^index\.php$ - [L]
-        RewriteCond %{REQUEST_FILENAME} !-f
-        RewriteCond %{REQUEST_FILENAME} !-d
-        RewriteRule . /index.php [L]
       Directory:
         /vagrant/{{doc_root}}:
+          DirectoryIndex: index.php index.html
+          RewriteEngine: On
           AllowOverride: All
           Order: allow,deny
           Allow: from all
