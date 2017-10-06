@@ -1,8 +1,9 @@
-# Define nginx template
-include:
-  - nginx.<%= platform %>:
-      defaults:
-        document_root: /vagrant/<%= doc_root %>
+# Define Custom nginx template. Create nginx/custom.sls and edit 
+# as desired
+#include:
+#  - nginx.custom:
+#      defaults:
+#        document_root: /vagrant/<%= doc_root %>
   
 # Extra packages to install
 extra_packages:
