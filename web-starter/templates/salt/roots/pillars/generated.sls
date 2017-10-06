@@ -88,4 +88,10 @@ apache:
           AllowOverride: All
           Order: allow,deny
           Allow: from all
+<% } else { %>
+# Define nginx template
+include:
+  - nginx.<%= platform %>:
+      defaults:
+        document_root: /vagrant/<%= doc_root %>
 <% } %>
