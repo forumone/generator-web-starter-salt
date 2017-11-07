@@ -17,7 +17,7 @@ base:
     - varnish
     - php.ng
     - php.ng.cli.ini
-<% if (webserver == 'nginx') { %>
+<% if (webserver == 'nginx' || webserver == 'apache24') { %>
     - php.ng.fpm.pools
 <% } %>
 <% if (webserver == 'apache') { %>
@@ -26,6 +26,13 @@ base:
     - apache.mod_php5
     - apache.config
     - apache.vhosts.standard
+<% } %>
+<% if (webserver == 'apache24') { %>
+    - core.certificates
+    - apache.mod_ssl
+    - apache.config
+    - apache.vhosts.standard
+    - apache.modules
 <% } %>
     - composer
 <% if (platform == 'drupal' || platform == 'drupal8') { %>

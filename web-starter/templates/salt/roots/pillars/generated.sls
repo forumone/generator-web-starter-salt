@@ -37,8 +37,10 @@ php:
 drush:
   version: '8.x'
 
-<% if (webserver == 'apache') { %>
+# Set doc_root for apache and nginx use in jinja
 {% set doc_root = '<%= doc_root %>' %}
+
+<% if (webserver == 'apache') { %>
 apache:
   lookup:
 <% if (php_base.indexOf('php7') !== -1) { %>
@@ -50,7 +52,7 @@ apache:
     NameVirtualHost: '*:443'
     LoadModule: ssl_module modules/mod_ssl.so
     Listen: 443
-    
+
   sites:
     vagrant.byf1.io:
       enabled: True
@@ -82,10 +84,57 @@ apache:
           AllowOverride: All
           Order: allow,deny
           Allow: from all
+<% } else if (webserver == 'apache24') { %>
+apache:
+  modules:
+    enabled:
+      - mpm_event
+    disabled:
+      - mpm_prefork
+  lookup:
+    server: httpd24u
+    version: '2.4'
+    mod_ssl: httpd24u-mod_ssl
+
+  sites:
+    vagrant.byf1.io:
+      enabled: True
+      template_file: salt://apache/vhosts/standard.tmpl
+      interface: '*'
+      port: '8080'
+      ServerAlias: '*.vagrant.byf1.io *'
+      DocumentRoot: /vagrant/{{doc_root}}
+      DirectoryIndex: index.php index.html
+      Formula_Append: |
+        ProxyPassMatch "^/(.*\.php(/.*)?)$" "unix:/var/run/php-fpm/vagrant.sock|fcgi://localhost/vagrant/public"
+      Directory:
+        /vagrant/{{doc_root}}:
+          RewriteEngine: On
+          AllowOverride: All
+          Order: allow,deny
+          Allow: from all
+    vagrant.byf1.io-ssl:
+      enabled: True
+      template_file: salt://apache/vhosts/standard.tmpl
+      interface: '*'
+      port: '443'
+      SSLCertificateFile: /etc/pki/tls/certs/vagrant.crt
+      SSLCertificateKeyFile: /etc/pki/tls/private/vagrant.key
+      ServerAlias: 'vagrant.byf1.io *.vagrant.byf1.io'
+      DirectoryIndex: index.php index.html
+      DocumentRoot: /vagrant/{{doc_root}}
+      Formula_Append: |
+        ProxyPassMatch "^/(.*\.php(/.*)?)$" "unix:/var/run/php-fpm/vagrant.sock|fcgi://localhost/vagrant/public"
+      Directory:
+        /vagrant/{{doc_root}}:
+          RewriteEngine: On
+          AllowOverride: All
+          Order: allow,deny
+          Allow: from all
 <% } else { %>
 # Define nginx template
 include:
   - nginx.<%= platform %>:
       defaults:
-        document_root: /vagrant/<%= doc_root %>
+        document_root: /vagrant/{{doc_root}}
 <% } %>

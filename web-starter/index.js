@@ -44,11 +44,11 @@ module.exports = generators.Base.extend({
     },
     {
       // Put config prompts here
-      type : 'checkbox',
+      type : 'list',
       name : 'webserver',
       message : 'Select a web server',
       default : config.webserver,
-      choices : [ 'nginx', 'apache' ]
+      choices : [ 'nginx', { name:'apache22', value: 'apache'} , 'apache24' ]
     },
     {
       // Put config prompts here
