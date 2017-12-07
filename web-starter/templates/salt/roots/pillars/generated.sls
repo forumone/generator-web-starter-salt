@@ -9,7 +9,10 @@ node:
     - grunt-cli
     - bower
 
-java: java-1.8.0-openjdk
+<% if (search == 'solr3') { %>
+# For solr 3.x
+java: java-1.7.0-openjdk
+<% } %>
 
 elasticsearch:
 # Tested versions: 5.3.0, 2.4.2
