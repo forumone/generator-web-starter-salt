@@ -20,7 +20,7 @@ nginx:
               - location /:
                 - try_files: $uri $uri/ @rewrite
               - location @rewrite:
-                - rewrite: ^/(.*)$ /index.php?q=$1
+                - rewrite: ^/(.*)$ /index.php?$query_string
               - location ~ \.php$:
                 - fastcgi_split_path_info: ^(.+\.php)(/.+)$
                 - fastcgi_param: PATH_INFO $fastcgi_path_info
